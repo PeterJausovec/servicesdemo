@@ -1,0 +1,25 @@
+version: "2"
+services:
+    service-a:
+        build: ./service-a
+        environment:
+            - APPINSIGHTS_INSTRUMENTATIONKEY
+        labels:
+            com.microsoft.azure.public.port: "80"
+        ports:
+            - "8080-8085:80-85"
+        links:
+            - service-b
+            - redis
+
+    service-b:
+        build: ./service-b
+        environment:
+            - APPINSIGHTS_INSTRUMENTATIONKEY
+        ports:
+            - 80
+
+    redis:
+        image: redis
+        ports:
+            - 6379

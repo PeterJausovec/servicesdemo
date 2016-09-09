@@ -1,0 +1,10 @@
+version: "2"
+services:
+    service-a-tests:
+        depends_on:
+            - service-a
+        image: wernight/phantomjs
+        volumes:
+            - ./service-a:/src
+        working_dir: /src
+        command: ["ls"]
